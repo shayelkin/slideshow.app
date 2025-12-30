@@ -1,0 +1,15 @@
+{
+  "originHash" : "6e19128a714bf795063bbedb95f200d0e3e121a1249e9099d848270767b55dce",
+  "pins" : [
+    {
+      "identity" : "nsviewproxy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephancasas/NSViewProxy",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e69a9eea0f9b253081e35b5ef9e33cfb6b081a63"
+      }
+    }
+  ],
+  "version" : 3
+}

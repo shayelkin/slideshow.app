@@ -11,6 +11,7 @@
 		1A0000030000000000000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000040000000000000001 /* ContentView.swift */; };
 		1A0000050000000000000001 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000060000000000000001 /* Controller.swift */; };
 		1A0000200000000000000001 /* ControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000210000000000000001 /* ControllerTests.swift */; };
+		FE515CC92F03CFA1005EED50 /* NSViewProxy in Frameworks */ = {isa = PBXBuildFile; productRef = FE515CC82F03CFA1005EED50 /* NSViewProxy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		1A0000060000000000000001 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		1A0000070000000000000001 /* Slideshow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slideshow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0000080000000000000001 /* Slideshow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Slideshow.entitlements; sourceTree = "<group>"; };
+		1A00001C0000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A0000210000000000000001 /* ControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerTests.swift; sourceTree = "<group>"; };
 		1A0000230000000000000001 /* SlideshowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideshowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE515CC92F03CFA1005EED50 /* NSViewProxy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +70,7 @@
 				1A0000040000000000000001 /* ContentView.swift */,
 				1A0000060000000000000001 /* Controller.swift */,
 				1A0000080000000000000001 /* Slideshow.entitlements */,
+				1A00001C0000000000000001 /* Info.plist */,
 			);
 			path = Slideshow;
 			sourceTree = "<group>";
@@ -153,6 +157,9 @@
 				Base,
 			);
 			mainGroup = 1A000000ROOTGROUP0000001;
+			packageReferences = (
+				FE515CC72F03CFA1005EED50 /* XCRemoteSwiftPackageReference "NSViewProxy" */,
+			);
 			productRefGroup = 1A0000110000000000000001 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -345,6 +352,7 @@
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Slideshow/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -386,6 +394,7 @@
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Slideshow/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -473,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE515CC72F03CFA1005EED50 /* XCRemoteSwiftPackageReference "NSViewProxy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephancasas/NSViewProxy";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE515CC82F03CFA1005EED50 /* NSViewProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE515CC72F03CFA1005EED50 /* XCRemoteSwiftPackageReference "NSViewProxy" */;
+			productName = NSViewProxy;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A0000160000000000000001 /* Project object */;
 }

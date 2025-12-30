@@ -17,18 +17,23 @@ final class Controller {
     private(set) var folderSelected = false
     private(set) var lastError: String?
 
+    var inUnitTest: Bool {
+        return NSClassFromString("XCTestCase") != nil
+    }
+
     var displayContent: DisplayContent {
+        if let image = currentImage {
+            return .image(image)
+        }
         if !folderSelected {
             return .message("Press \u{21B5} to open a folder")
         }
-        if imageFiles.isEmpty {
-            return .message(lastError ?? "No images found in folder")
-        }
-        return .image(imageFiles[currentIndex])
+        return .message(lastError ?? "No images found in folder")
     }
 
     var currentImage: URL? {
-        imageFiles.isEmpty ? nil : imageFiles[currentIndex]
+        assert(folderSelected || imageFiles.isEmpty)
+        return imageFiles.isEmpty ? nil : imageFiles[currentIndex]
     }
 
     func handleKeyPress(key: KeyEquivalent, modifiers: EventModifiers) -> Bool {
@@ -40,30 +45,30 @@ final class Controller {
             navigate(.next)
             return true
         case .return:
-            return selectFolder(modifiers.contains(.command))
+            openFolder(modifiers.contains(.command))
+            return true
         case .escape:
             NSApplication.shared.terminate(nil)
             return true
         default:
-        return false
+            return false
         }
     }
 
-    func selectFolder(_ force: Bool) -> Bool {
-        assert(NSClassFromString("XCTestCase") == nil)
-        if folderSelected && !force {
-            return false
-        }
+    func openFolder(_ force: Bool) {
+        assert(!inUnitTest)
+        guard force || !folderSelected else { return }
 
         let panel = NSOpenPanel()
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
 
-        if panel.runModal() == .OK, let url = panel.url {
-            loadImages(from: url)
+        panel.begin() { response in
+            if response == .OK, let url = panel.url {
+                self.loadImages(from: url)
+            }
         }
-        return true
     }
 
     // MARK: - Internal (testable)
@@ -90,6 +95,7 @@ final class Controller {
 
     func loadImages(from folder: URL) {
         assert(folder.isDirectory)
+        folderSelected = true
 
         let fileManager = FileManager.default
         let imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "heic", "webp"]
@@ -113,7 +119,5 @@ final class Controller {
         } catch {
             lastError = error.localizedDescription
         }
-
-        folderSelected = true
     }
 }

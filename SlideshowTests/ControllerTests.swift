@@ -275,6 +275,14 @@ struct ControllerTests {
         }
     }
 
+    // MARK: - Unit Test Detection
+
+    @Test("inUnitTest returns true when running tests")
+    func inUnitTestReturnsTrue() {
+        let controller = Controller()
+        #expect(controller.inUnitTest == true)
+    }
+
     // MARK: - Edge Cases
 
     @Test("Single image navigation stays at 0")
