@@ -4,12 +4,12 @@ import SwiftUI
 
 @Suite("State Tests")
 final class StateTests {
-    let tempDir = try? createTempDirectoryWithImages(count: 3)
+    lazy var tempDir: URL = {
+        try! createTempDirectoryWithImages(count: 3)
+    }()
 
     deinit {
-        if tempDir != nil {
-            try? FileManager.default.removeItem(at: tempDir!)
-        }
+        try? FileManager.default.removeItem(at: tempDir)
     }
 
     // MARK: - Navigation Tests
@@ -83,8 +83,7 @@ final class StateTests {
         state.folder = tempDir
         #expect(state.images.count == 3)
         #expect(state.currentIndex == 0)
-
-        //#expect(state.lastError == nil)
+        #expect(state.lastError == nil)
     }
 
     @Test("Load images sorts by filename")
@@ -243,7 +242,7 @@ final class StateTests {
 
         state.folder = tempDir
         #expect(state.windowTitle.hasSuffix("[1/3]"))
-        #expect(state.windowTitle.hasPrefix(tempDir!.lastPathComponent))
+        #expect(state.windowTitle.hasPrefix(tempDir.lastPathComponent))
     }
 
     @Test("Window title updates after navigation")
@@ -273,7 +272,7 @@ final class StateTests {
     // MARK: - Unit Test Detection
 
     @Test("inTestCase returns true when running tests")
-    func inUnitTestReturnsTrue() {
+    func inTestCaseReturnsTrue() {
         let state = SlideshowState()
         #expect(state.inTestCase == true)
     }

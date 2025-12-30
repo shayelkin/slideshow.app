@@ -19,20 +19,22 @@ enum DisplayContent {
 @Observable
 final class SlideshowState {
     private var _folder: URL?
+
+    // Getters are internal, but made visible for tests
     private(set) var images: [URL] = []
-    private(set) var currentIndex = 0 // Getter is internal, made public for testability
-    private var lastError: String?
+    private(set) var currentIndex = 0
+    private(set) var lastError: String?
 
     var hasFolder: Bool { folder != nil }
 
     // Some UI interactions break when running in CI.
-    var inTestCase: Bool { return NSClassFromString("XCTestCase") != nil }
+    var inTestCase: Bool { NSClassFromString("XCTestCase") != nil }
 
     var folder: URL? {
         get { _folder }
         set {
-            guard (newValue != nil) else { return }
-            loadFolder(newValue!)
+            guard let newValue = newValue else { return }
+            loadFolder(newValue)
         }
     }
 

@@ -48,7 +48,7 @@ struct ContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(state.windowTitle)
         .navigationDocument(state.folder)
-        // Focus need to be after navigationTitle, or it won't work.
+        // Focus needs to be after navigationTitle, or it won't work.
         .focusable()
         .focused($hasFocus)
         .proxy(to: .window) { window in
@@ -67,7 +67,6 @@ struct ContentView: View {
             }
         }
         .onKeyPress { press in
-            //state.handleKeyPress(key: press.key, modifiers: press.modifiers) ? .handled : .ignored
             switch press.key {
             case .delete, .upArrow, .leftArrow:
                 state.navigate(.previous)
@@ -92,7 +91,6 @@ struct ContentView: View {
             state.folder = url
         }
     }
-
 
     func showOpenDialog() {
         assert(!state.inTestCase)
