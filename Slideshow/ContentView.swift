@@ -40,6 +40,7 @@ struct ContentView: View {
             controller.handleKeyPress(key: press.key, modifiers: press.modifiers) ? .handled : .ignored
         }
         .onAppear {
+            guard NSClassFromString("XCTestCase") == nil else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 self.hasFocus = true
                 controller.selectFolder(false)

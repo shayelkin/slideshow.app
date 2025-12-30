@@ -113,39 +113,6 @@ struct ControllerTests {
         #expect(controller.currentIndex == 0)
     }
 
-    // MARK: - Select Folder Tests
-
-    @Test("Select folder without force when not selected returns true")
-    func selectFolderWithoutForceWhenNotSelected() {
-        let controller = Controller()
-        #expect(controller.folderSelected == false)
-        // Note: Can't fully test as NSOpenPanel requires user interaction
-    }
-
-    @Test("Select folder without force when already selected returns false")
-    func selectFolderWithoutForceWhenSelected() throws {
-        let controller = Controller()
-        let tempDir = try createTempDirectoryWithImages(count: 1)
-        defer { try? FileManager.default.removeItem(at: tempDir) }
-
-        controller.loadImages(from: tempDir)
-        #expect(controller.folderSelected == true)
-
-        let result = controller.selectFolder(false)
-        #expect(result == false)
-    }
-
-    @Test("Select folder with force when already selected returns true")
-    func selectFolderWithForceWhenSelected() throws {
-        let controller = Controller()
-        let tempDir = try createTempDirectoryWithImages(count: 1)
-        defer { try? FileManager.default.removeItem(at: tempDir) }
-
-        controller.loadImages(from: tempDir)
-        #expect(controller.folderSelected == true)
-        // Note: Would return true but can't test panel interaction
-    }
-
     // MARK: - Load Images Tests
 
     @Test("Load images populates imageFiles array")

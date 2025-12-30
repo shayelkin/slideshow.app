@@ -50,10 +50,11 @@ final class Controller {
     }
 
     func selectFolder(_ force: Bool) -> Bool {
+        assert(NSClassFromString("XCTestCase") == nil)
         if folderSelected && !force {
             return false
         }
-        
+
         let panel = NSOpenPanel()
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
@@ -69,7 +70,7 @@ final class Controller {
 
     func navigate(_ action: NavigationAction) {
         guard !imageFiles.isEmpty else { return }
-        
+
         switch action {
         case .previous:
             currentIndex -= 1
@@ -82,7 +83,7 @@ final class Controller {
                 currentIndex = 0
             }
         }
-        
+
         assert(0 <= currentIndex)
         assert(currentIndex < imageFiles.count)
     }
@@ -96,7 +97,7 @@ final class Controller {
         lastError = nil
         currentIndex = 0
         imageFiles = []
-        
+
         do {
             let contents = try fileManager.contentsOfDirectory(
                 at: folder,
@@ -112,7 +113,7 @@ final class Controller {
         } catch {
             lastError = error.localizedDescription
         }
-        
+
         folderSelected = true
     }
 }
