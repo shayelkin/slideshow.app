@@ -13,4 +13,4 @@ jobs:
       - name: Build
         run: 'xcodebuild clean build analyze | xcpretty && exit ${PIPESTATUS[0]}'
       - name: Test
-        run: 'xcodebuild test | xcpretty && exit ${PIPESTATUS[0]}'
+        run: 'xcodebuild test -scheme Slideshow | xcpretty && exit ${PIPESTATUS[0]}'
