@@ -13,14 +13,14 @@ extension View {
 }
 
 struct ContentView: View {
-    @State private var controller = Controller()
+    @State private var state = SlideshowState()
     @FocusState private var hasFocus
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
 
-            switch controller.displayContent {
+            switch state.displayContent {
             case .image(let url):
                 AsyncImage(url: url) { phase in
                     switch phase {
@@ -46,28 +46,64 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle(controller.windowTitle)
-        .navigationDocument(controller.currentFolder)
+        .navigationTitle(state.windowTitle)
+        .navigationDocument(state.folder)
+        // Focus needs to be after navigationTitle, or it won't work.
         .focusable()
         .focused($hasFocus)
         .proxy(to: .window) { window in
-            guard !controller.inUnitTest else { return }
+            guard !state.inTestCase else { return }
+
             if window.styleMask.contains(.fullScreen) == false {
                 window.toggleFullScreen(nil)
             }
-            // It can take a while for the window to change to full screen. Launching the open dialog
-            // now might open it on the wrong screen
+            // It can take a while for the window to go full screen. Launching the open
+            // dialog before that could have the dialog on another screen.
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 self.hasFocus = true
-                controller.openFolder(false)
+                if !state.hasFolder {
+                    showOpenDialog()
+                }
             }
         }
         .onKeyPress { press in
-            controller.handleKeyPress(key: press.key, modifiers: press.modifiers) ? .handled : .ignored
+            switch press.key {
+            case .delete, .upArrow, .leftArrow:
+                state.navigate(.previous)
+            case .space, .downArrow, .rightArrow:
+                state.navigate(.next)
+            case .return:
+                if !state.hasFolder || press.modifiers.contains(.command) {
+                    showOpenDialog()
+                }
+            case .escape:
+                // FIXME: use the actual window, rather than assuming it's keyWindow
+                NSApplication.shared.keyWindow?.close()
+            default:
+                return .ignored
+            }
+            return .handled
         }
         .onOpenURL { url in
-            guard url.isDirectory else { return }
-            controller.loadImages(from: url)
+            guard url.isDirectory else {
+                print("onOpenURL called with not a directory \(url)"); return
+            }
+            state.folder = url
+        }
+    }
+
+    func showOpenDialog() {
+        assert(!state.inTestCase)
+
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+
+        panel.begin() { response in
+            if response == .OK, let url = panel.url {
+                state.folder = url
+            }
         }
     }
 }

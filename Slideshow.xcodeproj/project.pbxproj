@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A0000010000000000000001 /* SlideshowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000020000000000000001 /* SlideshowApp.swift */; };
 		1A0000030000000000000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000040000000000000001 /* ContentView.swift */; };
-		1A0000050000000000000001 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000060000000000000001 /* Controller.swift */; };
-		1A0000200000000000000001 /* ControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000210000000000000001 /* ControllerTests.swift */; };
+		1A0000050000000000000001 /* SlideshowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000060000000000000001 /* SlideshowState.swift */; };
+		1A0000200000000000000001 /* StateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000210000000000000001 /* StateTests.swift */; };
 		FE515CC92F03CFA1005EED50 /* NSViewProxy in Frameworks */ = {isa = PBXBuildFile; productRef = FE515CC82F03CFA1005EED50 /* NSViewProxy */; };
 /* End PBXBuildFile section */
 
@@ -27,11 +27,11 @@
 /* Begin PBXFileReference section */
 		1A0000020000000000000001 /* SlideshowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideshowApp.swift; sourceTree = "<group>"; };
 		1A0000040000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1A0000060000000000000001 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		1A0000060000000000000001 /* SlideshowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideshowState.swift; sourceTree = "<group>"; };
 		1A0000070000000000000001 /* Slideshow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slideshow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0000080000000000000001 /* Slideshow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Slideshow.entitlements; sourceTree = "<group>"; };
 		1A00001C0000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A0000210000000000000001 /* ControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerTests.swift; sourceTree = "<group>"; };
+		1A0000210000000000000001 /* StateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTests.swift; sourceTree = "<group>"; };
 		1A0000230000000000000001 /* SlideshowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideshowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,7 +68,7 @@
 			children = (
 				1A0000020000000000000001 /* SlideshowApp.swift */,
 				1A0000040000000000000001 /* ContentView.swift */,
-				1A0000060000000000000001 /* Controller.swift */,
+				1A0000060000000000000001 /* SlideshowState.swift */,
 				1A0000080000000000000001 /* Slideshow.entitlements */,
 				1A00001C0000000000000001 /* Info.plist */,
 			);
@@ -87,7 +87,7 @@
 		1A0000250000000000000001 /* SlideshowTests */ = {
 			isa = PBXGroup;
 			children = (
-				1A0000210000000000000001 /* ControllerTests.swift */,
+				1A0000210000000000000001 /* StateTests.swift */,
 			);
 			path = SlideshowTests;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 			files = (
 				1A0000010000000000000001 /* SlideshowApp.swift in Sources */,
 				1A0000030000000000000001 /* ContentView.swift in Sources */,
-				1A0000050000000000000001 /* Controller.swift in Sources */,
+				1A0000050000000000000001 /* SlideshowState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0000200000000000000001 /* ControllerTests.swift in Sources */,
+				1A0000200000000000000001 /* StateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
