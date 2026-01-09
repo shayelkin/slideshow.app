@@ -8,7 +8,7 @@ A basic macOS app that displays images in a folder as a full-screen slideshow.
 
 Build using Xcode, or `xcodebuild` from the command line.
 
-### Keyboard Shortcuts (In-App)
+## Keyboard Shortcuts (In-App)
 
  Key              | Action
  -----------------|-------------
