@@ -1,10 +1,10 @@
-# Slideshow
+[![ci](https://github.com/shayelkin/slideshow/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shayelkin/slideshow/actions/workflows/ci.yml)
 
-[![xcodebuild](https://github.com/shayelkin/slideshow/actions/workflows/xcodebuild.yml/badge.svg?branch=main)](https://github.com/shayelkin/slideshow/actions/workflows/xcodebuild.yml)
+# Slideshow
 
 A basic macOS app that displays images in a folder as a full-screen slideshow.
 
-## Usage
+## Installation
 
 Build using Xcode, or `xcodebuild` from the command line.
 
