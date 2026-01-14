@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var state = SlideshowState()
     @FocusState private var hasFocus
     @State private var window: NSWindow?
+    @State private var isPickingFolder = false
     private let openPanelProvider: OpenPanelProvider
 
     init(openPanelProvider: OpenPanelProvider = RealOpenPanelProvider()) {
@@ -115,7 +116,10 @@ struct ContentView: View {
     }
 
     func showOpenDialog() {
+        guard !isPickingFolder else { return }
+        isPickingFolder = true
         Task {
+            defer { isPickingFolder = false }
             if let url = await openPanelProvider.pickFolder() {
                 await state.loadFolder(url)
             }
