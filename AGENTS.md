@@ -39,6 +39,11 @@ push/PR to main (see `.github/workflows/xcodebuild.yml`).
 - Images are sorted by filename using `localizedStandardCompare`.
 - Navigation wraps around (last image → first, first → last).
 - Window tabbing is disabled to allow separate full-screen spaces per window.
+- File system access is abstracted via `FileSystemProvider` protocol, allowing
+  tests to use `InMemoryFileSystemProvider` instead of real disk access.
+- Folder selection dialogs are abstracted via `OpenPanelProvider` protocol.
+- Only one open dialog can be active per window at a time (tracked via
+  `isPickingFolder` state).
 
 ### Files
 
@@ -51,8 +56,20 @@ push/PR to main (see `.github/workflows/xcodebuild.yml`).
     AsyncImage: jpg, jpeg, png, gif, bmp, tiff, heic, webp.
   - `navigate(_:)` method for `.previous`/`.next` navigation
   - Window title with folder name and image index (e.g., "Photos [3/10]")
+  - Takes a `FileSystemProvider` for dependency injection (defaults to
+    `RealFileSystemProvider`).
 - **ContentView.swift**: SwiftUI view that binds to `SlideshowState` and
   renders the UI using `AsyncImage`. Handles key presses (arrows/space/delete
   for navigation, Cmd+Return for folder selection, Esc to close window),
-  folder selection via `NSOpenPanel`, and sets window title via
+  folder selection via `OpenPanelProvider`, and sets window title via
   `navigationTitle` and proxy icon via `navigationDocument`.
+- **FileSystemProvider.swift**: Protocol abstracting file system access.
+  `RealFileSystemProvider` wraps `FileManager` for production use.
+- **OpenPanelProvider.swift**: Protocol abstracting folder selection dialogs.
+  `RealOpenPanelProvider` wraps `NSOpenPanel` with async/await support.
+
+### Test Files
+
+- **SlideshowStateTests.swift**: Unit tests for `SlideshowState` business logic.
+- **InMemoryFileSystemProvider.swift**: Test double implementing
+  `FileSystemProvider` with configurable in-memory file listings.
