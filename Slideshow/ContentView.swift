@@ -15,6 +15,7 @@ extension View {
 struct ContentView: View {
     @State private var state = SlideshowState()
     @FocusState private var hasFocus
+    @State private var window: NSWindow?
 
     var body: some View {
         ZStack {
@@ -54,17 +55,21 @@ struct ContentView: View {
         .proxy(to: .window) { window in
             guard !state.inTestCase else { return }
 
-            if window.styleMask.contains(.fullScreen) == false {
+            DispatchQueue.main.async {
+                self.window = window
+            }
+
+            if !window.styleMask.contains(.fullScreen) {
                 window.toggleFullScreen(nil)
+            } else {
+                onFullScreen()
             }
-            // It can take a while for the window to go full screen. Launching the open
-            // dialog before that could have the dialog on another screen.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                self.hasFocus = true
-                if !state.hasFolder {
-                    showOpenDialog()
-                }
-            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didEnterFullScreenNotification)) { notification in
+            guard let window = self.window,
+                let noteWindow = notification.object as? NSWindow,
+                window === noteWindow else { return }
+           onFullScreen()
         }
         .onKeyPress { press in
             switch press.key {
@@ -78,8 +83,7 @@ struct ContentView: View {
                 }
                 // Else will still return .handled, which is ok: it should be a no-op.
             case .escape:
-                // FIXME: use the actual window, rather than assuming it's keyWindow
-                NSApplication.shared.keyWindow?.close()
+                closeWindow()
             default:
                 return .ignored
             }
@@ -90,6 +94,18 @@ struct ContentView: View {
                 print("onOpenURL called with not a directory \(url)"); return
             }
             state.folder = url
+        }
+    }
+
+    func closeWindow() {
+        guard let window = self.window else { return }
+        window.close()
+    }
+
+    func onFullScreen() {
+        self.hasFocus = true
+        if !state.hasFolder {
+            showOpenDialog()
         }
     }
 
