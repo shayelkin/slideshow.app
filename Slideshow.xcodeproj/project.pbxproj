@@ -14,6 +14,8 @@
 		1A00002C0000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A00002D0000000000000001 /* Assets.xcassets */; };
 		FE515CC92F03CFA1005EED50 /* NSViewProxy in Frameworks */ = {isa = PBXBuildFile; productRef = FE515CC82F03CFA1005EED50 /* NSViewProxy */; };
 		FEF57CCC2F17493300F11A90 /* FileSystemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF57CCB2F17493300F11A90 /* FileSystemProvider.swift */; };
+		FEF57CCE2F175CB300F11A90 /* OpenPanelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF57CCD2F175CB300F11A90 /* OpenPanelProvider.swift */; };
+		FEF57CD02F175D3700F11A90 /* InMemoryFileSystemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF57CCF2F175D2F00F11A90 /* InMemoryFileSystemProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		1A0000230000000000000001 /* SlideshowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideshowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A00002D0000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEF57CCB2F17493300F11A90 /* FileSystemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemProvider.swift; sourceTree = "<group>"; };
+		FEF57CCD2F175CB300F11A90 /* OpenPanelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPanelProvider.swift; sourceTree = "<group>"; };
+		FEF57CCF2F175D2F00F11A90 /* InMemoryFileSystemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFileSystemProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,7 @@
 		1A0000100000000000000001 /* Slideshow */ = {
 			isa = PBXGroup;
 			children = (
+				FEF57CCD2F175CB300F11A90 /* OpenPanelProvider.swift */,
 				1A0000020000000000000001 /* SlideshowApp.swift */,
 				1A0000040000000000000001 /* ContentView.swift */,
 				1A0000060000000000000001 /* SlideshowState.swift */,
@@ -93,6 +98,7 @@
 		1A0000250000000000000001 /* SlideshowTests */ = {
 			isa = PBXGroup;
 			children = (
+				FEF57CCF2F175D2F00F11A90 /* InMemoryFileSystemProvider.swift */,
 				1A0000210000000000000001 /* SlideshowStateTests.swift */,
 			);
 			path = SlideshowTests;
@@ -192,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEF57CCE2F175CB300F11A90 /* OpenPanelProvider.swift in Sources */,
 				1A0000010000000000000001 /* SlideshowApp.swift in Sources */,
 				1A0000030000000000000001 /* ContentView.swift in Sources */,
 				1A0000050000000000000001 /* SlideshowState.swift in Sources */,
@@ -203,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEF57CD02F175D3700F11A90 /* InMemoryFileSystemProvider.swift in Sources */,
 				1A0000200000000000000001 /* SlideshowStateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

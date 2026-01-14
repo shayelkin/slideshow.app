@@ -33,9 +33,6 @@ final class SlideshowState {
 
     var hasFolder: Bool { folder != nil }
 
-    // Some UI interactions break when running in CI.
-    var inTestCase: Bool { NSClassFromString("XCTestCase") != nil }
-
     var displayContent: DisplayContent {
         if let image = currentImage {
             return .image(image)

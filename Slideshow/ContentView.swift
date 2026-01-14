@@ -16,6 +16,11 @@ struct ContentView: View {
     @State private var state = SlideshowState()
     @FocusState private var hasFocus
     @State private var window: NSWindow?
+    private let openPanelProvider: OpenPanelProvider
+
+    init(openPanelProvider: OpenPanelProvider = RealOpenPanelProvider()) {
+        self.openPanelProvider = openPanelProvider
+    }
 
     var body: some View {
         ZStack {
@@ -53,8 +58,6 @@ struct ContentView: View {
         .focusable()
         .focused($hasFocus)
         .proxy(to: .window) { window in
-            guard !state.inTestCase else { return }
-
             DispatchQueue.main.async {
                 self.window = window
             }
@@ -112,18 +115,9 @@ struct ContentView: View {
     }
 
     func showOpenDialog() {
-        assert(!state.inTestCase)
-
-        let panel = NSOpenPanel()
-        panel.canChooseFiles = false
-        panel.canChooseDirectories = true
-        panel.allowsMultipleSelection = false
-
-        panel.begin() { response in
-            if response == .OK, let url = panel.url {
-                Task {
-                    await state.loadFolder(url)
-                }
+        Task {
+            if let url = await openPanelProvider.pickFolder() {
+                await state.loadFolder(url)
             }
         }
     }
