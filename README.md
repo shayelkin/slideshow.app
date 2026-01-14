@@ -1,8 +1,8 @@
-[![ci](https://github.com/shayelkin/slideshow/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shayelkin/slideshow/actions/workflows/ci.yml)
-
 # Slideshow
 
 A basic macOS app that displays images in a folder as a full-screen slideshow.
+
+[![CI](https://github.com/shayelkin/slideshow/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/shayelkin/slideshow/actions/workflows/CI.yml)
 
 ## Installation
 
