@@ -29,7 +29,7 @@ Tests are in `SlideshowTests`, and use Swift's Testing framework (`@Test`,
 coverage as possible.
 
 This project uses GitHub actions for CI, that runs both build and tests on
-push/PR to main (see `.github/workflows/xcodebuild.yml`).
+push/PR to main (see `.github/workflows/CI.yml`).
 
 ## Key Implementation Details
 

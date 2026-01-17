@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import SwiftUI
 
 protocol OpenPanelProvider: Sendable {
@@ -12,7 +14,7 @@ struct RealOpenPanelProvider: OpenPanelProvider {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
-        
+
         let response = await panel.begin()
         if response == .OK, let url = panel.url {
             return url

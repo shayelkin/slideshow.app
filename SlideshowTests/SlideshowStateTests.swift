@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import Testing
 import SwiftUI
 @testable import Slideshow
@@ -8,7 +10,7 @@ final class SlideshowStateTests {
     func mockFiles(_ names: [String]) -> [URL] {
         names.map { URL(fileURLWithPath: "/mock/\($0)") }
     }
-    
+
     // Helper to provide a folder URL that satisfies internal assertions (exists on disk)
     var dummyFolder: URL {
         FileManager.default.temporaryDirectory
@@ -109,7 +111,7 @@ final class SlideshowStateTests {
     func loadImagesFiltersByExtension() async throws {
         let files = mockFiles(["image.jpg", "doc.txt", "photo.png"])
         let state = SlideshowState(fs: InMemoryFileSystemProvider(files))
-        
+
         await state.loadFolder(dummyFolder)
         #expect(state.images.count == 2)
     }
@@ -208,12 +210,12 @@ final class SlideshowStateTests {
     func displayContentShowsFirstImageAfterReload() async throws {
         let dir1 = URL(fileURLWithPath: "/mock/dir1")
         let dir2 = URL(fileURLWithPath: "/mock/dir2")
-        
+
         let fs = InMemoryFileSystemProvider(folders: [
             dir1: mockFiles(["x.jpg", "y.jpg"]),
             dir2: mockFiles(["p.jpg", "q.jpg"])
         ])
-        
+
         let state = SlideshowState(fs: fs)
 
         await state.loadFolder(dir1)
