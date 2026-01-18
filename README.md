@@ -6,19 +6,16 @@ A basic macOS app that displays images in a folder as a full-screen slideshow.
 
 ## Installation
 
-Build using Xcode, or `xcodebuild` from the command line.
-
-Not having an Apple Developer Account, I am unable to
-[notarize a release for binary distribution](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution).
+Download the source code, and build using Xcode, or `xcodebuild`.
 
 If you've never built a macOS application before, the following command will
-build the app, placing the app package in the `build/Release/` directory:
+build the app, placing the app package in the `./build/Release/` directory:
 
 ```sh
 xcodebuild clean build -scheme Slideshow -configuration Release SYMROOT="$(pwd)/build"
 ```
 
-## Keyboard Shortcuts (In-App)
+## In-App Keyboard Shortcuts
 
  Key              | Action
  -----------------|-------------
