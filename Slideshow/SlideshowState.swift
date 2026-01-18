@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 extension URL {
     var isDirectory: Bool {
@@ -13,9 +14,11 @@ enum NavigationAction {
     case next
 }
 
-enum DisplayContent {
+enum DisplayContent: Equatable {
     case image(URL)
-    case message(String)
+    case noFolder
+    case emptyFolder
+    case error(String)
 }
 
 @Observable
@@ -40,9 +43,12 @@ final class SlideshowState {
             return .image(image)
         }
         if !hasFolder {
-            return .message("Press \u{21B5} to open a folder")
+            return .noFolder
         }
-        return .message(lastError ?? "No images found in folder")
+        if let error = lastError {
+            return .error(error)
+        }
+        return .emptyFolder
     }
 
     var currentImage: URL? {
@@ -88,7 +94,6 @@ final class SlideshowState {
         currentIndex = 0
         lastError = nil
 
-        let imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "heic", "webp"]
         let fs = self.fs
 
         let result = await Task.detached {
@@ -97,7 +102,10 @@ final class SlideshowState {
 
                 let loadedImages = contents
                     .filter { url in
-                        imageExtensions.contains(url.pathExtension.lowercased())
+                        guard let type = UTType(filenameExtension: url.pathExtension) else {
+                            return false
+                        }
+                        return type.conforms(to: .image)
                     }
                     .sorted {
                         $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending

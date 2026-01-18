@@ -139,11 +139,7 @@ final class SlideshowStateTests {
     @Test("Display content shows prompt when no folder selected")
     func displayContentShowsPrompt() {
         let state = SlideshowState(fs: InMemoryFileSystemProvider([]))
-        if case .message(let text) = state.displayContent {
-            #expect(text.contains("open a folder"))
-        } else {
-            Issue.record("Expected message, got image")
-        }
+        #expect(state.displayContent == .noFolder)
     }
 
     @Test("Display content shows image URL when folder has images")
@@ -164,11 +160,7 @@ final class SlideshowStateTests {
         let state = SlideshowState(fs: InMemoryFileSystemProvider([]))
 
         await state.loadFolder(dummyFolder)
-        if case .message(let text) = state.displayContent {
-            #expect(text.contains("No images"))
-        } else {
-            Issue.record("Expected message, got image")
-        }
+        #expect(state.displayContent == .emptyFolder)
     }
 
     @Test("Display content updates after navigation")

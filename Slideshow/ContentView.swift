@@ -48,8 +48,16 @@ struct ContentView: View {
                         EmptyView()
                     }
                 }
-            case .message(let text):
-                Text(text)
+            case .noFolder:
+                Text("Press \u{21B5} to open a folder")
+                    .foregroundColor(.white)
+                    .font(.title)
+            case .emptyFolder:
+                Text("No images found in folder")
+                    .foregroundColor(.white)
+                    .font(.title)
+            case .error(let message):
+                Text(message)
                     .foregroundColor(.white)
                     .font(.title)
             }
