@@ -10,9 +10,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build
-        run: 'xcodebuild build-for-testing -scheme Slideshow | xcpretty && exit ${PIPESTATUS[0]}'
-      - name: Analyze
-        run: 'xcodebuild analyze -scheme Slideshow | xcpretty && exit ${PIPESTATUS[0]}'
-      - name: Test
-        run: 'xcodebuild test-without-building -scheme Slideshow | xcpretty && exit ${PIPESTATUS[0]}'
+      - name: Build and Test
+        run: 'xcodebuild clean build analyze test -scheme Slideshow | xcpretty && exit ${PIPESTATUS[0]}'
